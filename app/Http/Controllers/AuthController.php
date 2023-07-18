@@ -35,7 +35,7 @@ class AuthController extends Controller
         // Jika Anda ingin langsung masuk setelah registrasi, Anda bisa mengatur session di sini
         // Contoh: auth()->login($user);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil!');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login dengan akun yang telah dibuat.');
     }
 
     public function showLoginForm()
