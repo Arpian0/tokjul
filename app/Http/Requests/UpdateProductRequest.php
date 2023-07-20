@@ -26,8 +26,8 @@ class UpdateProductRequest extends FormRequest
         return [
             'sku' => ['required', 'max:100', 'unique:products,sku,' . $this->route('id')],
             'name' => ['required', 'max:100'],
-            'price' => ['required', 'numeric', 'min:1'],
-            'stock' => ['required', 'numeric', 'min:0'],
+            'price' => ['required'],
+            'stock' => ['required'],
             'image' => 'sometimes|image|mimes:jpeg,png,jpg|max:5000',
         ];
     }

@@ -17,7 +17,10 @@
                 <div class="container">
                     <div class="card mt-5">
                         <div class="card-header">
-                            <h3>Product Details</h3>
+                            <h3 style="text-align: center">Product Details</h3>
+                            <div style="text-align: right" class="mt-3">
+                                <a href="{{ route('products.index') }}" class="btn btn-secondary">Kembali</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -29,7 +32,7 @@
                                     <p><strong>ID:</strong> {{ $product->id }}</p>
                                     <p><strong>SKU:</strong> {{ $product->sku }}</p>
                                     <p><strong>Name:</strong> {{ $product->name }}</p>
-                                    <p><strong>Price:</strong> ${{ $product->price }}</p>
+                                    <p><strong>Price:</strong> Rp {{ $product->price }}</p>
                                     <p><strong>Stock:</strong> {{ $product->stock }}</p>
                                 </div>
                             </div>

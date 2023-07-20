@@ -19,43 +19,6 @@
                     <div class="card mt-5">
                         <div class="card-header">
                             <h3 style="text-align: center">List Product</h3>
-                            <div style="text-align: right">
-                                @if (Auth::check())
-                                    <!-- Tombol untuk memicu modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#logoutModal">
-                                        Logout
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="logoutModal" tabindex="-1"
-                                        aria-labelledby="logoutModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Logout</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div style="text-align: left" class="modal-body">
-                                                    Apakah Anda yakin ingin logout?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Batal</button>
-                                                    <!-- Form untuk melakukan logout -->
-                                                    <form action="{{ route('logout') }}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-primary">Logout</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @else
-                                    <!-- Tombol untuk login dan register -->
-                                @endif
-                            </div>
                         </div>
                         <div class="card-body">
                             @if (session('success'))
@@ -88,7 +51,7 @@
                                             <td>{{ $product->id }}</td>
                                             <td>{{ $product->sku }}</td>
                                             <td>{{ $product->name }}</td>
-                                            <td>{{ $product->price }}</td>
+                                            <td>Rp {{ $product->price }}</td>
                                             <td>{{ $product->stock }}</td>
                                             <td>
                                                 <a href="{{ route('products.show', $product->id) }}"

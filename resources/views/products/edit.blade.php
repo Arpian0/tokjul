@@ -17,7 +17,10 @@
                 <div class="container">
                     <div class="card mt-5">
                         <div class="card-header">
-                            <h3>Edit Product</h3>
+                            <h3 style="text-align: center">Edit Product</h3>
+                            <div style="text-align: right" class="mt-3">
+                                <a href="{{ route('products.index') }}" class="btn btn-secondary">Kembali</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             @if ($errors->any())

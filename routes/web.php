@@ -52,3 +52,38 @@ Route::post('login', [AuthController::class, 'login']);
 
 // Route untuk logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+// routes/web.php
+
+use App\Http\Controllers\HalamanController;
+
+// Rute untuk halaman beranda
+Route::get('/beranda', [HalamanController::class, 'beranda'])->name('beranda');
+
+// Rute untuk halaman keranjang belanja
+Route::get('/keranjang', [HalamanController::class, 'keranjang'])->name('keranjang');
+
+// Rute untuk halaman pencarian produk
+Route::get('/pencarian', [HalamanController::class, 'search'])->name('pencarian');
+
+// Rute untuk halaman pencarian produk
+// Route::get('/pencarian', [ProductController::class, 'search'])->name('pencarian');
+
+// Rute untuk halaman beranda
+Route::get('/tambah-barang', [HalamanController::class, 'tambahBarang'])->name('tambah_barang');
+
+// Rute untuk halaman proses pemesanan
+Route::get('/proses-pemesanan', [HalamanController::class, 'prosesPemesanan'])->name('proses_pemesanan');
+
+// Rute untuk halaman pembayaran online
+Route::get('/pembayaran-online', [HalamanController::class, 'pembayaranOnline'])->name('pembayaran_online');
+
+// Rute untuk halaman pusat bantuan dan FAQ
+Route::get('/pusat-bantuan', [HalamanController::class, 'pusatBantuan'])->name('pusat_bantuan');
+
+Route::post('/keranjang/tambah/{id}', [HalamanController::class, 'tambahKeKeranjang'])->name('keranjang.tambah');
+
+Route::post('/keranjang/batalkan', [HalamanController::class, 'batalkanKeranjang'])->name('keranjang.batalkan');
+
+Route::post('/keranjang/update/{id}', [HalamanController::class, 'updateKeranjang'])->name('keranjang.update');
+Route::post('/keranjang/hapus/{id}', [HalamanController::class, 'hapusItemKeranjang'])->name('keranjang.hapus');

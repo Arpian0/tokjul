@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return view('products.index', ['products' => $products]);
+        return view('fitur/beranda', ['products' => $products]);
     }
 
     /**
@@ -43,6 +43,20 @@ class ProductController extends Controller
             $product->save();
 
             return redirect(route('products.index'))->with('success', 'Added!');
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        // Cari produk berdasarkan nama yang sesuai dengan keyword yang diberikan
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->get();
+
+        if ($products->isEmpty()) {
+            return view('fitur/pencarian', ['empty' => true]);
+        } else {
+            return view('fitur/pencarian', compact('products'));
         }
     }
 
