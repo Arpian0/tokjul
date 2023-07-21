@@ -58,19 +58,19 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 use App\Http\Controllers\HalamanController;
 
 // Rute untuk halaman beranda
-Route::get('/beranda', [HalamanController::class, 'beranda'])->name('beranda');
+Route::get('/beranda', [HalamanController::class, 'beranda'])->name('beranda')->middleware('auth');
 
 // Rute untuk halaman keranjang belanja
-Route::get('/keranjang', [HalamanController::class, 'keranjang'])->name('keranjang');
+Route::get('/keranjang', [HalamanController::class, 'keranjang'])->name('keranjang')->middleware('auth');
 
 // Rute untuk halaman pencarian produk
-Route::get('/pencarian', [HalamanController::class, 'search'])->name('pencarian');
+Route::get('/pencarian', [HalamanController::class, 'search'])->name('pencarian')->middleware('auth');
 
 // Rute untuk halaman pencarian produk
 // Route::get('/pencarian', [ProductController::class, 'search'])->name('pencarian');
 
 // Rute untuk halaman beranda
-Route::get('/tambah-barang', [HalamanController::class, 'tambahBarang'])->name('tambah_barang');
+Route::get('/tambah-barang', [HalamanController::class, 'tambahBarang'])->name('tambah_barang')->middleware('auth');
 
 // Rute untuk halaman proses pemesanan
 Route::get('/proses-pemesanan', [HalamanController::class, 'prosesPemesanan'])->name('proses_pemesanan');
@@ -88,4 +88,10 @@ Route::post('/keranjang/batalkan', [HalamanController::class, 'batalkanKeranjang
 Route::post('/keranjang/update/{id}', [HalamanController::class, 'updateKeranjang'])->name('keranjang.update');
 Route::post('/keranjang/hapus/{id}', [HalamanController::class, 'hapusItemKeranjang'])->name('keranjang.hapus');
 
-Route::get('/proses-pemesanan', [HalamanController::class, 'prosesPemesanan'])->name('proses.pemesanan');
+Route::get('/proses-pemesanan', [HalamanController::class, 'prosesPemesanan'])->name('proses.pemesanan')->middleware('auth');
+
+Route::get('/pembayaran-online', [HalamanController::class, 'pembayaranOnline'])->name('pembayaran.online')->middleware('auth');
+
+Route::get('/konfirmasi-transfer', [HalamanController::class, 'konfirmasiTransfer'])->name('konfirmasi.transfer')->middleware('auth');
+
+Route::get('/pusat-bantuan', [HalamanController::class, 'pusatBantuan'])->name('pusat.bantuan')->middleware('auth');

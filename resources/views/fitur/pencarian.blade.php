@@ -21,7 +21,8 @@
         <h2>Hasil Pencarian:</h2>
         <ul>
             @foreach ($products as $product)
-                <li><img src="{{ asset($product->image) }}" class="img-thumbnail" style="width:200px" /> :
+                <li>
+                    <img src="{{ asset($product->image) }}" class="img-thumbnail" style="width:200px" /> :
                     {{ $product->name }} - Rp. {{ $product->price }}
 
                     <form style="padding-bottom: 30px" action="{{ route('keranjang.tambah', ['id' => $product->id]) }}"

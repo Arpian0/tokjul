@@ -12,8 +12,10 @@ class HalamanController extends Controller
 {
     public function beranda()
     {
-        // Logika untuk menampilkan halaman beranda
-        return view('fitur/beranda');
+        // Ambil data produk dari database (misalnya, ambil 6 produk terbaru)
+        $products = Product::orderBy('created_at', 'desc')->take(6)->get();
+
+        return view('fitur.beranda', compact('products'));
     }
 
     public function keranjang()
@@ -81,9 +83,10 @@ class HalamanController extends Controller
         $products = Product::where('name', 'like', '%' . $keyword . '%')->get();
 
         if ($products->isEmpty()) {
-            return view('fitur/pencarian', ['empty' => true]);
+            $empty = true;
+            return view('fitur.pencarian', compact('empty'));
         } else {
-            return view('fitur/pencarian', compact('products'));
+            return view('fitur.pencarian', compact('products'));
         }
     }
 
@@ -121,13 +124,46 @@ class HalamanController extends Controller
 
     public function pembayaranOnline()
     {
-        // Logika untuk menampilkan halaman pembayaran online
-        return view('fitur/pembayaran_online');
+        // Ambil data keranjang belanja dari sesi
+        $cart = Session::get('cart', []);
+
+        // Jika keranjang belanja tidak kosong, kirimkan data produk ke halaman pembayaran online
+        if (!empty($cart)) {
+            // Mengambil semua produk yang ada di keranjang berdasarkan ID
+            $productIds = array_keys($cart);
+            $products = Product::whereIn('id', $productIds)->get();
+
+            // Hitung total harga pesanan
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice += $product->price * $cart[$product->id]['quantity'];
+            }
+
+            // Tampilkan halaman pembayaran online dengan data produk dan total harga
+            return view('fitur/pembayaran_online', compact('products', 'totalPrice', 'cart'));
+        } else {
+            // Jika keranjang belanja kosong, kembalikan ke halaman keranjang
+            return redirect()->route('keranjang')->with('error', 'Keranjang belanja kosong.');
+        }
+    }
+
+    public function konfirmasiTransfer()
+    {
+        // Ambil data keranjang belanja dari sesi
+        $cart = Session::get('cart', []);
+
+        // Hitung total harga pesanan
+        $totalPrice = 0;
+        foreach ($cart as $product) {
+            $totalPrice += $product['price'] * $product['quantity'];
+        }
+
+        // Tampilkan halaman konfirmasi pembayaran
+        return view('fitur.konfirmasi_transfer', compact('totalPrice'));
     }
 
     public function pusatBantuan()
     {
-        // Logika untuk menampilkan halaman pusat bantuan dan FAQ
-        return view('fitur/pusat_bantuan');
+        return view('fitur.pusat_bantuan');
     }
 }

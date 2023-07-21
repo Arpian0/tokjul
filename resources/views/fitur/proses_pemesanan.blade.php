@@ -36,6 +36,6 @@
 
     <div class="text-center">
         <a href="{{ route('keranjang') }}" class="btn btn-secondary">Kembali ke Keranjang</a>
-        <button type="submit" class="btn btn-success">Konfirmasi Pemesanan</button>
+        <a href="{{ route('pembayaran.online') }}" class="btn btn-success">Konfirmasi Pemesanan</a>
     </div>
 @endsection
