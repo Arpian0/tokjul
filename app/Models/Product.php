@@ -16,4 +16,9 @@ class Product extends Model
         'stock',
         'image',
     ];
+
+    public function getSubtotal($quantity)
+    {
+        return $this->price * $quantity;
+    }
 }

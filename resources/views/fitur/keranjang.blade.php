@@ -47,6 +47,10 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="text-right">
+            <a href="{{ route('proses.pemesanan') }}" class="btn btn-success">Proses Pemesanan</a>
+        </div>
     @else
         <p>Keranjang belanja kosong.</p>
     @endif

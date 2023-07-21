@@ -96,8 +96,27 @@ class HalamanController extends Controller
 
     public function prosesPemesanan()
     {
-        // Logika untuk menampilkan halaman proses pemesanan
-        return view('fitur/proses_pemesanan');
+        // Ambil data keranjang belanja dari sesi
+        $cart = Session::get('cart', []);
+
+        // Jika keranjang belanja tidak kosong, kirimkan data produk ke halaman proses pemesanan
+        if (!empty($cart)) {
+            // Mengambil semua produk yang ada di keranjang berdasarkan ID
+            $productIds = array_keys($cart);
+            $products = Product::whereIn('id', $productIds)->get();
+
+            // Hitung total harga pesanan
+            $totalPrice = 0;
+            foreach ($products as $product) {
+                $totalPrice += $product->price * $cart[$product->id]['quantity'];
+            }
+
+            // Tampilkan halaman proses pemesanan dengan data produk dan total harga
+            return view('fitur/proses_pemesanan', compact('products', 'totalPrice', 'cart'));
+        } else {
+            // Jika keranjang belanja kosong, kembalikan ke halaman keranjang
+            return redirect()->route('keranjang')->with('error', 'Keranjang belanja kosong.');
+        }
     }
 
     public function pembayaranOnline()

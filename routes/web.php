@@ -87,3 +87,5 @@ Route::post('/keranjang/batalkan', [HalamanController::class, 'batalkanKeranjang
 
 Route::post('/keranjang/update/{id}', [HalamanController::class, 'updateKeranjang'])->name('keranjang.update');
 Route::post('/keranjang/hapus/{id}', [HalamanController::class, 'hapusItemKeranjang'])->name('keranjang.hapus');
+
+Route::get('/proses-pemesanan', [HalamanController::class, 'prosesPemesanan'])->name('proses.pemesanan');
